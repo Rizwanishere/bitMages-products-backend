@@ -19,7 +19,7 @@ const port = 3000;
 /* Start the server to listen for incoming 
 requests on the specified port */
 server.listen(port,()=>{
-    console.log("The server is running");
+    console.log(`The server is running on ${port}`);
 });
 
 
