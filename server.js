@@ -1,8 +1,8 @@
 const express = require('express');
 
-// Importing the modules from controllers folder
-const homeCtrl = require('./controllers/homeCtrl');
-const bookCtrl = require('./controllers/bookCtrl');
+//Importing modules from routes folder
+const homeRoutes = require('./routes/homeRoute');
+const bookRoutes = require('./routes/bookRoute');
 
 const app = express();
 
@@ -12,8 +12,5 @@ app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
 
-// syntax - get(path,handler_function)
-app.get('/',homeCtrl.home);
-app.get('/health',homeCtrl.health)
-app.get('/books',bookCtrl.books);
-app.get('/authors',bookCtrl.authors)
+app.use(homeRoutes);
+app.use(bookRoutes);
