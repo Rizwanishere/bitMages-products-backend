@@ -55,14 +55,28 @@ const post = (req,res) => {
 
      booksDB.push(body);
      res.status(201);
-     res.send('Created')
+     res.send('Created');
 
 }
+
+// 3.DELETE (REMOVE)
+const remove = (req,res) => {
+    const id = +req.params.id;            //(+) is used to convert a value into a number
+
+    for(let i=0; i<booksDB.length; i++){
+        if(booksDB[i].id===id){
+            booksDB.splice(i,1);
+            break;
+        }
+    }
+    res.status(204).send();
+};
 
 module.exports = {
     books,
     authors,
     getById,
-    post
+    post,
+    remove
 }
 
