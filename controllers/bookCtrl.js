@@ -48,9 +48,21 @@ const getById = (req,res) => {
     }
 }
 
+// 2. CREATE (POST)
+const post = (req,res) => {
+     const { body } = req;
+     console.log('body:',body);
+
+     booksDB.push(body);
+     res.status(201);
+     res.send('Created')
+
+}
+
 module.exports = {
     books,
     authors,
     getById,
+    post
 }
 
