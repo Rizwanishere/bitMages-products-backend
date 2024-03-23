@@ -1,6 +1,6 @@
 const authors = (req,res)=>{
     const authors = ['Morgan Housel','Robert Kiyosaki'];
-    res.json(authors);
+    res.send(authors);
 }
 
 const booksDB = [{
@@ -28,6 +28,7 @@ const books = (req,res)=>{
     res.json(booksDB);
 }
 
+
 // 1. GET
 const getById = (req,res) => {
     const id = parseInt(req.params.id);
@@ -48,16 +49,25 @@ const getById = (req,res) => {
     }
 }
 
+
 // 2. CREATE (POST)
+const isInvalid = (body) => {
+    return !body.name || !body.price || !body.author;
+}; 
+
 const post = (req,res) => {
      const { body } = req;
-     console.log('body:',body);
-
-     booksDB.push(body);
-     res.status(201);
-     res.send('Created');
-
+    
+     if(isInvalid(body)){
+        res.status(400);
+        res.send('Bad Request');
+     } else {
+        booksDB.push(body);
+        res.status(201);
+        res.send('Created');
+     }
 }
+
 
 // 3.DELETE (REMOVE)
 const remove = (req,res) => {
@@ -72,11 +82,49 @@ const remove = (req,res) => {
     res.status(204).send();
 };
 
+// 4.UPDATE (PUT)              //Full update
+const put = (req,res) => {
+    const id = +req.params.id;
+    const payload = req.body;
+
+    if(!payload.id || !payload.name || !payload.price){
+        res.status(400).send('Bad Request');
+        return;
+    } else {
+        for(let i=0; i<booksDB.length; i++){
+            if (booksDB[i].id === id) {
+                booksDB[i].price = payload.price;
+                booksDB[i].name = payload.name;
+                booksDB[i].author = payload.author;
+            }
+        }
+        res.status(204).send();
+    }
+}
+
+
+// 4.UPDATE (PATCH)             //Partial update
+const patch = (req,res) => {
+    const id = +req.params.id;
+    const payload = req.body;
+
+    for(let i=0; i<booksDB.length; i++){
+        if(booksDB[i].id ===id){
+            for(let key in payload){
+                booksDB[i][key] = payload[key];
+            }
+        }
+    }
+    res.status(204).send();
+}
+
 module.exports = {
     books,
     authors,
     getById,
     post,
-    remove
+    remove,
+    put,
+    patch
 }
 
