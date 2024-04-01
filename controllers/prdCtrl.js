@@ -2,7 +2,8 @@
 const Product = require('../models/prdModel');
 
 const get = (req,res) => {
-    Product.find().then((data) => {
+    Product.find()
+    .then((data) => {
         res.status(200);
         res.json(data);
     })
