@@ -1,8 +1,10 @@
 const express = require('express');
+const mongoose = require('mongoose');
 
 //Importing modules from routes folder
 const homeRoutes = require('./routes/homeRoute');
 const bookRoutes = require('./routes/bookRoute');
+const productRoutes = require('./routes/prdRoutes');
 
 const app = express();
 
@@ -13,5 +15,7 @@ app.listen(port,()=>{
 });
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
+mongoose.connect('mongodb://localhost:27017/cgc-db');
 app.use(homeRoutes);
 app.use(bookRoutes);
+app.use('/products',productRoutes);
