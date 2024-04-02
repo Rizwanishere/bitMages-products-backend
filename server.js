@@ -15,7 +15,9 @@ app.listen(port,()=>{
 });
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
+
 mongoose.connect('mongodb://localhost:27017/cgc-db');
+
 app.use(homeRoutes);
 app.use(bookRoutes);
 app.use('/products',productRoutes);

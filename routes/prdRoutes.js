@@ -4,6 +4,11 @@ const productCtrl = require('../controllers/prdCtrl');
 
 const router = express.Router();
 
+router.post('/',productCtrl.post);
 router.get('/',productCtrl.get);    
+router.get('/:id',productCtrl.getById);    
+router.delete('/:id',productCtrl.remove);
+router.put('/:id',productCtrl.put);
+router.patch('/:id',productCtrl.patch);
 
 module.exports = router;
