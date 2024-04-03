@@ -15,7 +15,10 @@ const post = async(req,res) => {
 const get = async(req,res) => {
    
     try{
-        const data = await ProductRepo.get();
+        const page = req.params.page || 1;
+        const size = req.params.size || 10;
+
+        const data = await ProductRepo.get(page,size);
         res.status(200).json(data);
     }catch(err){
         res.status(500).send('Internal Server Error');
