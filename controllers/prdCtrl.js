@@ -1,11 +1,10 @@
-const Product = require('../models/prdModel');
+const ProductRepo = require('../repositories/prdRepo');
 
 const post = async(req,res) => {
     const payload = req.body;
 
     try{
-        const product1 = new Product(payload);
-        await product1.save();
+        await ProductRepo.post(payload);
         res.status(200).send('Inserted');
     }catch(err){
         res.status(500).send('Internal Server Error');
@@ -16,7 +15,7 @@ const post = async(req,res) => {
 const get = async(req,res) => {
    
     try{
-        const data = await Product.find({},{__v:0});
+        const data = await ProductRepo.get();
         res.status(200).json(data);
     }catch(err){
         res.status(500).send('Internal Server Error');
@@ -26,7 +25,7 @@ const get = async(req,res) => {
 
 const getById = async(req,res) => {
     const id = req.params.id;
-    const data = await Product.findById({_id:id},{__v:0});
+    const data = await ProductRepo.getById(id);
 
     if(!id){
         res.status(404).send('Not found');
@@ -40,7 +39,7 @@ const remove = async(req,res) => {
 
     try{
         const id = req.params.id;
-        await Product.deleteOne({_id:id});
+        await ProductRepo.remove(id);
         res.status(204).send();
     }catch(err){
         res.status(500).send('Internal Server Error');
@@ -53,7 +52,8 @@ const put = async(req,res) => {
     
     try{
         const id = req.params.id;
-        await Product.updateOne({_id:id},req.body);
+        const payload = req.body;
+        await ProductRepo.put(id,payload);
         res.status(204).send();
     }catch(err){
         res.status(500).send('Internal Server Error');
@@ -65,7 +65,8 @@ const patch = async(req,res) => {
     
     try{
         const id = req.params.id;
-        await Product.updateOne({_id:id},{$set:req.body});
+        const payload = req.body;
+        await ProductRepo.patch(id,payload);
         res.status(200).send();
     }catch(err){
         res.status(500).send('Internal Server Error');
