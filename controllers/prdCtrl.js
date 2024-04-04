@@ -17,16 +17,17 @@ const get = async(req,res) => {
     try{
         const page = req.params.page || 1;
         const size = req.params.size || 10;
+        const search = req.query.search;
 
-        const data = await ProductRepo.get(page,size);
+        const data = await ProductRepo.get(page,size,search);
         
         // Pagination Metadata
-        const totalRows = await ProductRepo.getCount();
-        const totalPages = Math.ceil(totalRows / size);
+        const totalElements = await ProductRepo.getCount(search);
+        const totalPages = Math.ceil(totalElements / size);
 
         const response = {
             data,
-            totalRows,
+            totalElements,
             totalPages,
         }
 
