@@ -19,7 +19,18 @@ const get = async(req,res) => {
         const size = req.params.size || 10;
 
         const data = await ProductRepo.get(page,size);
-        res.status(200).json(data);
+        
+        // Pagination Metadata
+        const totalRows = await ProductRepo.getCount();
+        const totalPages = Math.ceil(totalRows / size);
+
+        const response = {
+            data,
+            totalRows,
+            totalPages,
+        }
+
+        res.status(200).json(response);
     }catch(err){
         res.status(500).send('Internal Server Error');
     }
