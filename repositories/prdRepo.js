@@ -20,12 +20,18 @@ const getFilterExp = (search) => {
     };
 };
 
-const get = (currentPage,size,search) => {
+const get = (currentPage,size,search,sort,direction) => {
     const rowsToSkip = (currentPage - 1) * size;
     const filter = getFilterExp(search);
+
+    let sortDir = 1;
+    if(direction.toLowerCase() === 'desc'){
+        sortDir = -1;
+    }
     
     return Product
     .find(filter,{__v:0})
+    .sort({[sort]: sortDir})
     .skip(rowsToSkip)
     .limit(size)
 };

@@ -18,8 +18,10 @@ const get = async(req,res) => {
         const page = req.params.page || 1;
         const size = req.params.size || 10;
         const search = req.query.search;
+        const sort = req.query.sort;
+        const direction = req.query.direction || 'asc';
 
-        const data = await ProductRepo.get(page,size,search);
+        const data = await ProductRepo.get(page,size,search,sort,direction);
         
         // Pagination Metadata
         const totalElements = await ProductRepo.getCount(search);
