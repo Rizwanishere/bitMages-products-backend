@@ -15,17 +15,20 @@ const post = async(req,res) => {
 const get = async(req,res) => {
    
     try{
-        const page = req.params.page || 1;
-        const size = req.params.size || 10;
-        const search = req.query.search;
-        const sort = req.query.sort;
-        const direction = req.query.direction || 'asc';
+        const options = {
+            page : req.params.page || 1,
+            size : req.params.size || 10,
+            search : req.query.search,
+            sort : req.query.sort,
+            direction : req.query.direction || 'asc',
+        }
+        
 
-        const data = await ProductRepo.get(page,size,search,sort,direction);
+        const data = await ProductRepo.get(options);
         
         // Pagination Metadata
-        const totalElements = await ProductRepo.getCount(search);
-        const totalPages = Math.ceil(totalElements / size);
+        const totalElements = await ProductRepo.getCount(options.search);
+        const totalPages = Math.ceil(totalElements / options.size);
 
         const response = {
             data,

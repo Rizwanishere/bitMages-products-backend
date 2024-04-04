@@ -20,7 +20,8 @@ const getFilterExp = (search) => {
     };
 };
 
-const get = (currentPage,size,search,sort,direction) => {
+const get = (options) => {
+    const {currentPage,size,search,sort,direction} = options;
     const rowsToSkip = (currentPage - 1) * size;
     const filter = getFilterExp(search);
 
