@@ -21,8 +21,8 @@ const getFilterExp = (search) => {
 };
 
 const get = (options) => {
-    const {currentPage,size,search,sort,direction} = options;
-    const rowsToSkip = (currentPage - 1) * size;
+    const {page,size,search,sort,direction} = options;
+    const rowsToSkip = (page - 1) * size;
     const filter = getFilterExp(search);
 
     let sortDir = 1;
