@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/cgc-db');
 app.use(homeRoutes);
 app.use(bookRoutes);
 app.use('/products',productRoutes);
-app.use('/signup',userRoutes);
+app.use('/users',userRoutes);
 
 app.use((req,res) => {
     res.status(404).send('Not Found');

@@ -24,9 +24,28 @@ const signup = async(req,res) => {
             res.status(500).send('Internal Server Error');
         }
     }
-    
 };
+
+const signin = async(req,res) => {
+
+    const payload = req.body;
+    const dbUser = await UserRepo.getUserByEmail(payload.email);
+
+    if(!dbUser){
+        res.status(404).send('Invalid Email');
+        return;
+    }
+
+    const isValid = await bcrypt.compare(payload.password,dbUser.password); 
+
+    if(isValid){
+        res.status(200).json({username: dbUser.username});
+    }else{
+        res.status(401).send('Invalid password');
+    }
+}
 
 module.exports = {
     signup,
+    signin,
 };
