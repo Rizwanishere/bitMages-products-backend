@@ -4,7 +4,7 @@ const UserRepo = require('../repositories/userRepo');
 const emailExists = (err) => err.message 
     && err.message.indexOf('duplicate key error') > -1;
 
-const add = async(req,res) => {
+const signup = async(req,res) => {
     try{
         const payload = req.body;
         payload.password = await bcrypt.hash(payload.password, 2);
@@ -28,5 +28,5 @@ const add = async(req,res) => {
 };
 
 module.exports = {
-    add,
+    signup,
 };

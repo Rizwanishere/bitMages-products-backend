@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 //Importing modules from routes folder
 const homeRoutes = require('./routes/homeRoute');
 const bookRoutes = require('./routes/bookRoute');
-const productRoutes = require('./routes/prdRoutes');
+const productRoutes = require('./routes/prdRoute');
 const userRoutes = require('./routes/userRoute');
 
 const app = express();
