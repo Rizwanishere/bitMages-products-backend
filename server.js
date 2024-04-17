@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const homeRoutes = require('./routes/homeRoute');
 const bookRoutes = require('./routes/bookRoute');
 const productRoutes = require('./routes/prdRoutes');
+const userRoutes = require('./routes/userRoute');
 
 const app = express();
 
@@ -21,3 +22,8 @@ mongoose.connect('mongodb://localhost:27017/cgc-db');
 app.use(homeRoutes);
 app.use(bookRoutes);
 app.use('/products',productRoutes);
+app.use('/signup',userRoutes);
+
+app.use((req,res) => {
+    res.status(404).send('Not Found');
+});
