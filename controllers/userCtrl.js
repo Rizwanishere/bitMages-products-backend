@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const UserRepo = require('../repositories/userRepo');
 
 const emailExists = (err) => err.message 
@@ -6,8 +7,11 @@ const emailExists = (err) => err.message
 const add = async(req,res) => {
     try{
         const payload = req.body;
-        payload.createdDate = new Date();
+        payload.password = await bcrypt.hash(payload.password, 2);
+        
         console.log('User Added:',payload);
+        payload.createdDate = new Date();
+        
         
         await UserRepo.add(payload);
 
