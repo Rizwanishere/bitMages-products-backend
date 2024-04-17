@@ -13,7 +13,7 @@ const signup = async(req,res) => {
         payload.createdDate = new Date();
         
         
-        await UserRepo.add(payload);
+        await UserRepo.signup(payload);
 
         res.status(201).send('Created');   
     }catch(err){
