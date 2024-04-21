@@ -7,6 +7,8 @@ const bookRoutes = require('./routes/bookRoute');
 const productRoutes = require('./routes/prdRoute');
 const userRoutes = require('./routes/userRoute');
 const auth = require('./middlewares/auth');
+const morgan = require('morgan');
+const fs = require('fs');
 
 const app = express();
 
@@ -15,6 +17,9 @@ const port = 3000;
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
+
+const fsStream = fs.createWriteStream(__dirname + '/logs/request.log',{flags: 'a'});
+app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
