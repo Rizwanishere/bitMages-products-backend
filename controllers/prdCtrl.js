@@ -1,4 +1,5 @@
 const ProductRepo = require('../repositories/prdRepo');
+const logger = require('../utils/logger');
 
 const post = async(req,res) => {
     const payload = req.body;
@@ -15,6 +16,7 @@ const post = async(req,res) => {
 const get = async(req,res) => {
    
     try{
+        logger.info('Fetching Products');
         const options = {
             page : req.params.page || 1,
             size : req.params.size || 10,
@@ -32,9 +34,11 @@ const get = async(req,res) => {
 
         const response = {
             data,
-            totalElements,
+            totalElements, 
             totalPages,
         }
+
+        logger.info('Fetched products');
 
         res.status(200).json(response);
     }catch(err){

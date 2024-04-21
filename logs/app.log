@@ -1,0 +1,5 @@
+{"name":"logger-instance","hostname":"RIZWAN","pid":1336,"level":30,"msg":"signup started","time":"2024-04-21T10:22:57.530Z","v":0}
+{"name":"logger-instance","hostname":"RIZWAN","pid":1336,"level":50,"location":"userCtrl","err":{"index":0,"code":11000,"keyPattern":{"email":1},"keyValue":{"email":"rizzuishere@gmail.com"}},"msg":"E11000 duplicate key error collection: cgc-db.users index: email_1 dup key: { email: \"rizzuishere@gmail.com\" }","time":"2024-04-21T10:22:57.563Z","v":0}
+{"name":"logger-instance","hostname":"RIZWAN","pid":1336,"level":30,"msg":"signup started","time":"2024-04-21T10:23:27.870Z","v":0}
+{"name":"logger-instance","hostname":"RIZWAN","pid":1336,"level":30,"msg":"Fetching Products","time":"2024-04-21T10:25:05.793Z","v":0}
+{"name":"logger-instance","hostname":"RIZWAN","pid":1336,"level":30,"msg":"Fetched products","time":"2024-04-21T10:25:05.817Z","v":0}

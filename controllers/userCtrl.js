@@ -4,11 +4,14 @@ const UserRepo = require('../repositories/userRepo');
 const jwt = require('jsonwebtoken');
 const config = require('../config');
 
+const logger = require('../utils/logger');
+
 const emailExists = (err) => err.message 
     && err.message.indexOf('duplicate key error') > -1;
 
 const signup = async(req,res) => {
     try{
+        logger.info('signup started');
         const payload = req.body;
         payload.password = await bcrypt.hash(payload.password, 2);
         
@@ -20,7 +23,10 @@ const signup = async(req,res) => {
 
         res.status(201).send('Created');   
     }catch(err){
-        console.log(err.message);
+        logger.error({
+            location: 'userCtrl',
+            err : err
+        });
         if(emailExists(err)){
             res.status(400).send('Email Already Exists');
         }else{

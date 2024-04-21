@@ -1,5 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
 
 //Importing modules from routes folder
 const homeRoutes = require('./routes/homeRoute');
@@ -7,8 +10,7 @@ const bookRoutes = require('./routes/bookRoute');
 const productRoutes = require('./routes/prdRoute');
 const userRoutes = require('./routes/userRoute');
 const auth = require('./middlewares/auth');
-const morgan = require('morgan');
-const fs = require('fs');
+
 
 const app = express();
 
@@ -18,7 +20,13 @@ app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
 });
 
-const fsStream = fs.createWriteStream(__dirname + '/logs/request.log',{flags: 'a'});
+const logsDir = path.join(__dirname,'logs');
+
+if(!fs.existsSync(logsDir)){
+    fs.mkdirSync(logsDir);
+}
+
+const fsStream = fs.createWriteStream(path.join(__dirname,'logs','request.log'),{flags: 'a'});
 app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
