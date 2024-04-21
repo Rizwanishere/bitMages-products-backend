@@ -54,7 +54,7 @@ const getById = async(req,res) => {
     }
 }
 
-
+// only admins can delete
 const remove = async(req,res) => {
 
     try{

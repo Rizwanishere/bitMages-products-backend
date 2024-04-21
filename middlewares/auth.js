@@ -38,17 +38,26 @@ function tokenAuth(req,res,next){
    const authToken = tokens[1];
    
    jwt.verify(authToken,config.jwtSecret,(err,decoded) => {
-        if(err){
+   if(err){
             res.status(401).send('Unauthorized');
         }else{
+            req.role = decoded.role;
             console.log(decoded);
             next();
         } 
    });
 }
 
+function authorizeAdmin(req,res,next){
+    if(req.role === 'Admin'){
+        next();
+    }else{
+        res.status(401).send('Forbidden');
+    }
+}
 
 module.exports = {
     // basicAuth,
     tokenAuth,
+    authorizeAdmin,
 }

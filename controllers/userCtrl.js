@@ -45,7 +45,7 @@ const signin = async(req,res) => {
             console.log('JWT Secret:', config.jwtSecret);
             res.status(200).json({
                 username: dbUser.username,
-                token: jwt.sign({email: dbUser.email}, config.jwtSecret, {expiresIn: '1d'}),
+                token: jwt.sign({email: dbUser.email, role: dbUser.role}, config.jwtSecret, {expiresIn: '1d'}),
             });
         }else{
             res.status(401).send('Invalid password');
