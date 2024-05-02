@@ -32,7 +32,7 @@ app.use(morgan('combined',{ stream: fsStream }));
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
 // mongoose.connect('mongodb://localhost:27017/cgc-db');
-const conStr = process.env.conStr;
+const conStr = process.env.dbConStr;
 mongoose.connect(conStr);
 console.log('DB connected');
 
