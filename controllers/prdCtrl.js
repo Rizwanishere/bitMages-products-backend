@@ -27,6 +27,14 @@ const get = async(req,res) => {
         
 
         const data = await ProductRepo.get(options);
+
+        for(let i=0; i<data.length; i++){
+            if(data[i].image){
+                const protocol = req.protocol;
+                const domain = req.get('host');
+                data[i].image = `${protocol}://${domain}/${data[i].image}`;
+            }
+        }
         
         // Pagination Metadata
         const totalElements = await ProductRepo.getCount(options.search);

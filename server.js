@@ -31,16 +31,18 @@ app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
-// mongoose.connect('mongodb://localhost:27017/cgc-db');
-const conStr = process.env.dbConStr;
-mongoose.connect(conStr);
+mongoose.connect('mongodb://localhost:27017/cgc-db');
+// const conStr = process.env.dbConStr;
+// mongoose.connect(conStr);
 console.log('DB connected');
+
+app.use(express.static('uploads/'));
 
 app.use(homeRoutes);
 app.use('/users',userRoutes);
 
 // app.use(auth.basicAuth);
-app.use(auth.tokenAuth);
+// app.use(auth.tokenAuth);
 
 app.use(bookRoutes);
 app.use('/products',productRoutes);

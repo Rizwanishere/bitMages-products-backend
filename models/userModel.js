@@ -7,6 +7,7 @@ const schema = new Schema({
     password: {type: String},
     active: {type: Boolean, default: true},
     role: {type: String, default: 'User'},
+    image: {type: String},
     createdDate: {type: Date},
     updatedDate: {type: Date, default: Date.now}
 });
