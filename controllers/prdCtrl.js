@@ -58,6 +58,12 @@ const get = async(req,res) => {
 const getById = async(req,res) => {
     const id = req.params.id;
     const data = await ProductRepo.getById(id);
+    
+    if(data.image){
+        const protocol = req.protocol;
+        const domain = req.get('host');
+        data.image = `${protocol}://${domain}/${data.image}`;
+    }
 
     if(!id){
         res.status(404).send('Not found');
