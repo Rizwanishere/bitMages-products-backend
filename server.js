@@ -31,9 +31,10 @@ app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
-mongoose.connect('mongodb://localhost:27017/cgc-db');
+// mongoose.connect('mongodb://localhost:27017/cgc-db');
 // const conStr = process.env.dbConStr;
-// mongoose.connect(conStr);
+const conStr = 'mongodb+srv://rizwanishere:Hotwheels123@rizwan-cluster.erdoutb.mongodb.net/';
+mongoose.connect(conStr);
 console.log('DB connected');
 
 app.use(express.static('uploads/'));
