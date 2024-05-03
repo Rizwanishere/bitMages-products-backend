@@ -1,9 +1,18 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const schema = new mongoose.Schema({
-    model: {type:String},
-    brand: {type:String},
-    price: {type:Number},
+    model: {
+        type:String, 
+        required: [true,'Model is required']
+    },
+    brand: {
+        type:String, 
+        required: [true,'Brand is required']
+    },
+    price: {
+        type:Number,
+        required: [true,'Price is required']
+    },
     discount: {type:Number},
     inStock: {type:String},
     image: {type: String},
@@ -16,4 +25,4 @@ const schema = new mongoose.Schema({
 
 schema.index({ brand: 1, model: 1 });
 
-module.exports = mongoose.model('product',schema)
+module.exports = mongoose.model('product',schema);

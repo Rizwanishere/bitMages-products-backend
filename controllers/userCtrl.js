@@ -9,6 +9,9 @@ const logger = require('../utils/logger');
 const emailExists = (err) => err.message 
     && err.message.indexOf('duplicate key error') > -1;
 
+const isInvalid = (err) => err.message
+    && err.message.indexOf('validation failed') > -1;
+
 const signup = async(req,res) => {
     try{
         logger.info('signup started');
@@ -27,7 +30,11 @@ const signup = async(req,res) => {
             location: 'userCtrl',
             err : err
         });
-        if(emailExists(err)){
+        if(isInvalid(err)){
+            res.status(400);
+            res.json(err.errors);
+        }
+        else if(emailExists(err)){
             res.status(400).send('Email Already Exists');
         }else{
             res.status(500).send('Internal Server Error');
