@@ -26,5 +26,6 @@ router.get('/page/:page/size/:size',productCtrl.get);
 router.delete('/:id', auth.authorizeAdmin, productCtrl.remove);
 router.put('/:id',productCtrl.put);
 router.patch('/:id',productCtrl.patch);
+router.post('/:id/reviews',productCtrl.addReview);
 
 module.exports = router;

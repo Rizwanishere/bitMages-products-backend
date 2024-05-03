@@ -1,4 +1,5 @@
 const ProductRepo = require('../repositories/prdRepo');
+const reviewRepo = require('../repositories/reviewRepo');
 const logger = require('../utils/logger');
 
 const post = async(req,res) => {
@@ -111,6 +112,19 @@ const patch = async(req,res) => {
     }   
 }
 
+const addReview = async(req,res) => {
+    try{
+        const productId = req.params.id;
+        const payload = req.body;
+        payload.productId = productId;
+        payload.createdDate = new Date();
+        await reviewRepo.add(payload);
+        res.status(201).send('Created');   
+    }catch(err){
+        res.status(500).send('Internal Server Error');
+    }
+};
+
 module.exports = {
     post,
     get,
@@ -118,4 +132,5 @@ module.exports = {
     remove,
     put,
     patch,
+    addReview,
 }
