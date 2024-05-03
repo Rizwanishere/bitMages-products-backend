@@ -31,11 +31,17 @@ app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
-// mongoose.connect('mongodb://localhost:27017/cgc-db');
-// const conStr = process.env.dbConStr;
-const conStr = 'mongodb+srv://rizwanishere:Hotwheels123@rizwan-cluster.erdoutb.mongodb.net/';
+// Local mongodb
+mongoose.connect('mongodb://localhost:27017/cgc-db');
+
+// Mongodb atlas
+/* const conStr = 'mongodb+srv://rizwanishere:Hotwheels123@rizwan-cluster.erdoutb.mongodb.net/';
 mongoose.connect(conStr);
-console.log('DB connected');
+console.log('DB connected');*/
+
+// For Deployment
+/*const conStr = process.env.dbConStr;
+mongoose.connect(conStr);*/
 
 app.use(express.static('uploads/'));
 
