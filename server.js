@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 //Importing modules from routes folder
 const homeRoutes = require('./routes/homeRoute');
@@ -15,6 +16,8 @@ const auth = require('./middlewares/auth');
 const app = express();
 
 const port = process.env.PORT || 3000;
+
+app.use(cors());
 
 app.listen(port,()=>{
     console.log(`Server is running on port ${port}`);
