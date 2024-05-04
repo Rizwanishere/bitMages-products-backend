@@ -38,13 +38,17 @@ const get = async(req,res) => {
         }
         
         // Pagination Metadata
-        const totalElements = await ProductRepo.getCount(options.search);
-        const totalPages = Math.ceil(totalElements / options.size);
+        const rows = await ProductRepo.getCount(options.search);
+        const pages = Math.ceil(rows / options.size);
+
+        const metadata = {
+            rows,
+            pages
+        };
 
         const response = {
             data,
-            totalElements, 
-            totalPages,
+            metadata
         }
 
         logger.info('Fetched products');
