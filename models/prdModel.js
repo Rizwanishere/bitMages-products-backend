@@ -14,7 +14,7 @@ const schema = new mongoose.Schema({
         required: [true,'Price is required']
     },
     discount: {type:Number},
-    inStock: {type:String},
+    inStock: {type:Boolean},
     image: {type: String},
     createdDate: Date,
     updatedDate: {
