@@ -2,7 +2,8 @@ const express = require('express');
 const productCtrl = require('../controllers/prdCtrl');
 const auth = require('../middlewares/auth');
 const multer = require('multer');
-const router = express.Router();
+const router = express.Router();    
+const path = require('path');
 
 const drive = multer.diskStorage({
     filename: function (req, file, cb){
@@ -13,7 +14,7 @@ const drive = multer.diskStorage({
         cb(null,filename);
     },
     destination: function (req, file, cb){
-        cb(null, '../uploads/');
+        cb(null, path.join(__dirname, '..', 'uploads'));
     }
 });
 
