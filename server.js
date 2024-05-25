@@ -45,7 +45,7 @@ mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('uploads/', express.static(path.join(__dirname, 'uploads')));
 
 app.use(homeRoutes);
 app.use('/users',userRoutes);

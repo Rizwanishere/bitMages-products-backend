@@ -15,7 +15,7 @@ const drive = multer.diskStorage({
         cb(null,filename);
     },
     destination: function (req, file, cb) {
-        const uploadsPath = path.join(__dirname, '..', 'uploads');
+        const uploadsPath = path.join(__dirname, '..', 'uploads/');
         
         if (!fs.existsSync(uploadsPath)) {
             fs.mkdirSync(uploadsPath);
