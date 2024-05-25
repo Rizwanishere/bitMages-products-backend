@@ -35,7 +35,7 @@ app.use(morgan('combined',{ stream: fsStream }));
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
 // Mongodb atlas || Local mongoDB
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-db';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/cgc-db';
 mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
