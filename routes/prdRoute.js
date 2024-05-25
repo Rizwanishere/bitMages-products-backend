@@ -2,6 +2,8 @@ const express = require('express');
 const productCtrl = require('../controllers/prdCtrl');
 const auth = require('../middlewares/auth');
 const multer = require('multer');
+const fs = require('fs');
+const path = require('path');
 const router = express.Router();
 
 const drive = multer.diskStorage({
