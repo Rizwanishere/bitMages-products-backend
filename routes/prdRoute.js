@@ -2,8 +2,7 @@ const express = require('express');
 const productCtrl = require('../controllers/prdCtrl');
 const auth = require('../middlewares/auth');
 const multer = require('multer');
-const router = express.Router();    
-const path = require('path');
+const router = express.Router();
 
 const drive = multer.diskStorage({
     filename: function (req, file, cb){
@@ -13,8 +12,15 @@ const drive = multer.diskStorage({
         req.body.image = filename;
         cb(null,filename);
     },
-    destination: function (req, file, cb){
-        cb(null, path.join(__dirname, '..', 'uploads'));
+    destination: function (req, file, cb) {
+        const uploadsPath = path.join(__dirname, '..', 'uploads');
+        
+        // Ensure uploads directory exists
+        if (!fs.existsSync(uploadsPath)) {
+            fs.mkdirSync(uploadsPath);
+        }
+
+        cb(null, uploadsPath);
     }
 });
 

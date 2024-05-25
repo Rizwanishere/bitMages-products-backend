@@ -24,9 +24,14 @@ app.listen(port,()=>{
 });
 
 const logsDir = path.join(__dirname,'logs');
+const uploadsDir = path.join(__dirname, 'uploads');
 
 if(!fs.existsSync(logsDir)){
     fs.mkdirSync(logsDir);
+}
+
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir);
 }
 
 const fsStream = fs.createWriteStream(path.join(__dirname,'logs','request.log'),{flags: 'a'});
