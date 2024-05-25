@@ -24,14 +24,9 @@ app.listen(port,()=>{
 });
 
 const logsDir = path.join(__dirname,'logs');
-const uploadsDir = path.join(__dirname, 'uploads');
 
 if(!fs.existsSync(logsDir)){
     fs.mkdirSync(logsDir);
-}
-
-if (!fs.existsSync(uploadsDir)) {
-    fs.mkdirSync(uploadsDir);
 }
 
 const fsStream = fs.createWriteStream(path.join(__dirname,'logs','request.log'),{flags: 'a'});
@@ -45,7 +40,7 @@ mongoose.connect(mongoURI)
     .then(() => console.log('MongoDB connected'))
     .catch(err => console.error('MongoDB connection error:', err));
 
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use(express.static('uploads/'));
 
 app.use(homeRoutes);
 app.use('/users',userRoutes);
