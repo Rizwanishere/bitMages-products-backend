@@ -1,5 +1,5 @@
 const config = {
-  jwtSecret: process.env.jwtSecret || "secret",
+  jwtSecret: process.env.JWT_SECRET || "secret",
 };
 
 module.exports = config;

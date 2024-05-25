@@ -34,17 +34,11 @@ app.use(morgan('combined',{ stream: fsStream }));
 
 app.use(express.json()); //Middleware to parse JSON request bodies (POST)
 
-// Local mongodb
-mongoose.connect('mongodb://localhost:27017/cgc-db');
-
-// Mongodb atlas
-/* const conStr = 'mongodb+srv://rizwanishere:Hotwheels123@rizwan-cluster.erdoutb.mongodb.net/';
-mongoose.connect(conStr);
-console.log('DB connected');*/
-
-// For Deployment
-/*const conStr = process.env.dbConStr;
-mongoose.connect(conStr);*/
+// Mongodb atlas || Local mongoDB
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/todo-db';
+mongoose.connect(mongoURI)
+    .then(() => console.log('MongoDB connected'))
+    .catch(err => console.error('MongoDB connection error:', err));
 
 app.use(express.static('uploads/'));
 
@@ -52,7 +46,7 @@ app.use(homeRoutes);
 app.use('/users',userRoutes);
 
 // app.use(auth.basicAuth);
-app.use(auth.tokenAuth);
+// app.use(auth.tokenAuth);
 
 app.use(bookRoutes);
 app.use('/products',productRoutes);
